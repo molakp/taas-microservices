@@ -47,8 +47,10 @@ public class Car {
     @JsonManagedReference(value = "CarReservations")
     private List<Reservation> reservation = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Position position;
+  /*  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Position position;*/
+    @Column
+    private String positionID;
 
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference(value = "CarFeedback")
@@ -75,8 +77,8 @@ public class Car {
                 ", availabilityPresent=" + availabilityPresent +
                 ", user=" + user.toString() +
                 ", reservation=" + reservation +
-                ", position=" + feedback +
-                ", position=" + position +
+                ", feedback=" + feedback +
+                ", positionID=" + positionID +
                 '}';
     }
 

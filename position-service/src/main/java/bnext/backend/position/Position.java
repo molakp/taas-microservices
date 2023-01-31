@@ -19,7 +19,7 @@ import java.util.UUID;
 @Entity
 public class Position {
 
-    @Id() //dice che questa e la chiave primaria
+    @Id //dice che questa e la chiave primaria
     @GeneratedValue
     private UUID id;
     private Double latitude;

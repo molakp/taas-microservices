@@ -7,8 +7,10 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 @RestController
+@RequestMapping("/pos")
 public class PositionController {
 
     @Autowired
@@ -20,17 +22,17 @@ public class PositionController {
     @Autowired
     private RestTemplate restTemplate;
 
-    @RequestMapping("pos/id={positionId}")
-    public Position getPositionByID(@PathVariable String posId) {
+    @RequestMapping("id={posId}")
+    public String getPositionByID(@PathVariable String posId) {
         return positionService.getPositionById(posId);
     }
 
     @RequestMapping("getAllPositions")
-    public ArrayList<Position> getAllPositions() {
+    public String getAllPositions() {
         return positionService.getAllPositions();
     }
 
-    @PostMapping("savePos")
+        @PostMapping("savePos")
     public String savePosition(@RequestBody @NotNull Position position) {
         return positionService.createPosition(position).toString();
     }

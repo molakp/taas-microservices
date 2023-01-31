@@ -1,9 +1,11 @@
 package bnext.backend.position;
 
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 @Service
 public class PositionService {
@@ -12,16 +14,30 @@ public class PositionService {
     private PositionRepository positionRepository;
 
 
-    public Position getPositionById(String positionId) {
-        return positionRepository.findById(positionId).isPresent() ? positionRepository.findById(positionId).get() : null;
+    public String getPositionById(String positionId) {
+        //return positionRepository.findById(positionId).isPresent() ? positionRepository.findById(positionId).get() : null;
+        System.out.println(positionRepository.findByid(UUID.fromString(positionId)) );
+        //return positionRepository.findByid(UUID.fromString(positionId));
+
+        Gson gson = new Gson();
+        return gson.toJson(positionRepository.findByid(UUID.fromString(positionId)));
+
     }
 
-    public Position createPosition(Position position) {
-        return positionRepository.save(position);
+
+    public String createPosition(Position position) {
+        Gson gson = new Gson();
+        return gson.toJson(positionRepository.save(position));
     }
 
-    public ArrayList<Position> getAllPositions() {
-        return (ArrayList<Position>) positionRepository.findAll();
+    public String getAllPositions() {
+        Gson gson = new Gson();
+        System.out.println((ArrayList<Position>) positionRepository.findAll());
+        ArrayList<Position> positions = new ArrayList<>();
+        positionRepository.findAll().forEach(positions::add);
+
+
+        return gson.toJson(positions);
     }
 
     /*
