@@ -21,10 +21,22 @@ public class GatewayApplication {
 
 	}
 
+	/*
+	* QUI DEFINIAMO LE ROUTE PER TROVARE I MICROSERVIZI
+	* Per comodità conviene mettere un prefisso nel controller per ogni gruppo di chiamate, es per Position pos/
+	* 	@RestController
+		@RequestMapping("/pos")
+		public class PositionController
+	* in modo da aggiungere solo 1 regola, altrimenti bisognerebbe aggiungere una regola per ogni chiamata
+	* */
 	@Bean
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
 		return builder.routes()
+				// così gli diciamo che questa route va a prendere il servizio position-service
+				// all url http://localhost:8081 e fa il match con tutti gli endpoint che iniziano per /pos/
 				.route("get-all-positions", r -> r.path("/pos/*").uri("http://localhost:8081/"))
+
+				// TODO : fare la stessa cosa per le altri gruppi di chiamate e l'api gateway è fatto
 
 
 				.build();
