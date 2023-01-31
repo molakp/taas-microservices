@@ -36,10 +36,8 @@ public class GatewayApplication {
 				// all url http://localhost:8081 e fa il match con tutti gli endpoint che iniziano per /pos/
 
 				//ROUTE POSITION
-				.route("position", r -> r.path("/pos/*").uri("http://localhost:8081/"))
-				.route("tutte-le-altre-api", r -> r.path("/*").uri("http://localhost:8080/"))
-
-				// TODO : fare la stessa cosa per le altri gruppi di chiamate e l'api gateway è fatto
+				//.route("position", r -> r.path("/pos/*").uri("http://localhost:8081/"))
+				.route("tutte-le-altre-api", r -> r.path("/user/*").uri("http://localhost:8080/"))
 
 
 				.build();

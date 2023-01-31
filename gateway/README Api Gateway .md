@@ -1,4 +1,6 @@
 *Questo servizio svolge il compito di API Gateway*
+- RICHIEDE JAVA 17 o maggiore ( forse si può cambiare per mettere tutto a 11)
+ma non ho tempo ora
 - Porta: 9191
 - URL: http://localhost:9191
 - Scopo: tutte le chiamate vengono fatte a lui, lui poi le indirizza al servizio giusto
