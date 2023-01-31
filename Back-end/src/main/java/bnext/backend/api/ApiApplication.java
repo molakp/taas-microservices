@@ -4,8 +4,11 @@ import bnext.backend.api.user.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -14,7 +17,7 @@ import java.util.Collections;
 
 
 @SpringBootApplication
-
+@EnableEurekaClient
 public class ApiApplication {
 
     public static void main(String[] args) {
@@ -24,6 +27,11 @@ public class ApiApplication {
         SpringApplication.run(ApiApplication.class, args);
     }
 
+    @LoadBalanced
+    @Bean
+    public RestTemplate getRestTemplate() {
+        return new RestTemplate();
+    }
     /* Così diciamo al server che può accettare richiesta dal frontend che gira su porta 4200
      **/
     @Bean

@@ -34,7 +34,10 @@ public class GatewayApplication {
 		return builder.routes()
 				// così gli diciamo che questa route va a prendere il servizio position-service
 				// all url http://localhost:8081 e fa il match con tutti gli endpoint che iniziano per /pos/
-				.route("get-all-positions", r -> r.path("/pos/*").uri("http://localhost:8081/"))
+
+				//ROUTE POSITION
+				.route("position", r -> r.path("/pos/*").uri("http://localhost:8081/"))
+				.route("tutte-le-altre-api", r -> r.path("/*").uri("http://localhost:8080/"))
 
 				// TODO : fare la stessa cosa per le altri gruppi di chiamate e l'api gateway è fatto
 
