@@ -23,5 +23,5 @@ Andare su docker-compose.yaml e dovrebbe uscire il pulsante per avviare tutto. D
 
 
 KUBERNETES
-Installazione: https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
+Installazione: Docker Desktop installa già tutto anche per Kubernetes non serve fare altro
 
