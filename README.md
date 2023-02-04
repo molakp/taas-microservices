@@ -12,11 +12,12 @@ Per avviarli da IntelliJ occhio alle rispettive versioni, JAVA 11 per i primi 3 
 AVVIO DEL PROGETTO
 
 *Con Docker*
+
 Per avviare tutto insieme è meglio usare Docker
-Andare su docker-compose.yaml e dovrebbe uscire il pulsante per avviare tutto. Docker compose va a prendersi i docker file dei singoli servizi e li esegue
-  con le specifiche che gli sono date
+Andare su docker-compose.yaml e dovrebbe uscire il pulsante per avviare tutto. Docker compose va a prendersi i docker file dei singoli servizi e li esegue  con le specifiche che gli sono date
  
 *Senza Docker*
+
  Per avviare i singoli servizi senza docker  ( per fare sviluppo veloce e robe così ) fare come di solito ma occhio alla versione di Java che si usa dei setting di Intellij (questo problema  non c'è con Docker)
 
 
