@@ -3,7 +3,6 @@
 |Servizio| Funzione| Porta|
 |----------|----------|----------|
 |eureka| Discovery|  http://localhost:8761/ |
-
 |API service| Il servizio principale che fa tutto tranne posizionei | http://localhost:8080/ |
 |Position | Il serviio delle posizioni | http://localhost:8081/ |
 | Api Gateway | Riunisce tutti i servizi sotto un unico url | http://localhost:9191/ |
