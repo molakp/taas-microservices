@@ -1,7 +1,9 @@
 # taas-microservices-eureka
 
 |Servizio| Funzione| Porta|
+|----------|----------|----------|
 |eureka| Discovery|  http://localhost:8761/ |
+
 - API service: il servizio principale che fa tutto, http://localhost:8080/
 - Position service: il serviio delle posizioni http://localhost:8081/
 - Api Gateway: riunisce tutti i servizi sotto un unico url http://localhost:9191/
