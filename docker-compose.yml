@@ -1,0 +1,29 @@
+version: '3'
+services:
+  service-discovery:
+    container_name: eureka-server
+    build: ./discovery-server
+    # Port exposed to allow interaction with the Web UI.
+    ports:
+      - '8761:8761'
+  gateway:
+    container_name: gateway
+    build: ./gateway
+    ports:
+      - '9191:9191'
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+  api-service:
+    container_name: api-service
+    build: ./api-service
+    ports:
+      - '8080:8080'
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+  position-service:
+    container_name: position-service
+    build: ./position-service
+    ports:
+      - '8081:8081'
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
