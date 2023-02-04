@@ -1,7 +1,7 @@
 # taas-microservices-eureka
 
-|Servizio| Funzione| Porta| Java
-|----------|----------|----------|
+|Servizio| Funzione| Porta| Java |
+|----------|----------|----------|----------|
 |Eureka| Discovery|  http://localhost:8761/ | 11 |
 |API service| Il servizio principale che fa tutto tranne posizioni | http://localhost:8080/ | 11 |
 |Position | Il servizo delle posizioni | http://localhost:8081/ | 11 |
