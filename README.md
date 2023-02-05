@@ -25,3 +25,5 @@ Andare su docker-compose.yaml e dovrebbe uscire il pulsante per avviare tutto. D
 KUBERNETES
 Installazione: Docker Desktop installa già tutto anche per Kubernetes non serve fare altro
 
+Se le immagini docker sono già state create andare nella cartella kubernetes e fare da Linux:
+ kubectl apply -f nome-file-deployment.yaml
