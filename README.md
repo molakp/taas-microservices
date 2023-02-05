@@ -23,5 +23,10 @@ Andare su docker-compose.yaml e dovrebbe uscire il pulsante per avviare tutto. D
 
 
 KUBERNETES
-Installazione: Docker Desktop installa già tutto anche per Kubernetes non serve fare altro
+Installazione:
+
+Installare Minikube https://minikube.sigs.k8s.io/docs/start/
+
+Dopo aprire il terminale:
+- minikube start (ci mette un po' perchè scarica tutto kubernetes)
 
