@@ -56,9 +56,12 @@ public class UserService {
 
     }
 
-    public @Nullable User getUserByName(String username) {
-        if (userRepository.findByUsername(username) != null) {
-            return userRepository.findByUsername(username).get();
+    public @Nullable User getUserByUsername(String username) {
+        //System.out.println("Ecco l'username in input "+username);
+        if (userRepository.findByUsername(username).isPresent()) {
+            Optional<User> userRepo = userRepository.findByUsername(username);
+            return userRepo.get();
+            //return userRepository.findByUsername(username).get();
         } else {
             System.out.println("Users does not exist");
             return null;
@@ -109,16 +112,34 @@ public class UserService {
         if (!userRepository.findByUsername(user.getUsername()).isEmpty()) {
             throw new RuntimeException("User already exists");
         }
-        User newUser = User.builder()
-                .active(1)
-                .birthDate(user.getBirthDate())
-                .name(user.getName())
-                .password(passwordEncoder.encode(user.getPassword()))
-                .permissions(user.getPermissions())
-                .surname(user.getSurname())
-                .username(user.getUsername())
-                .roles(user.getRoles())
-                .build();
+        User newUser;
+        //System.out.println("Ecco l'utente che arriva a signup "+user);
+        // se viene specificato l'ID, allora creo l'utente con quello specifico ID, altrimenti ne assegno uno casuale
+        if(user.getUserId() != null) {
+            newUser = User.builder()
+                    .userId(user.getUserId())
+                    .active(1)
+                    .birthDate(user.getBirthDate())
+                    .name(user.getName())
+                    .password(passwordEncoder.encode(user.getPassword()))
+                    .permissions(user.getPermissions())
+                    .surname(user.getSurname())
+                    .username(user.getUsername())
+                    .roles(user.getRoles())
+                    .build();
+        } else{
+            newUser = User.builder()
+                    .active(1)
+                    .birthDate(user.getBirthDate())
+                    .name(user.getName())
+                    .password(passwordEncoder.encode(user.getPassword()))
+                    .permissions(user.getPermissions())
+                    .surname(user.getSurname())
+                    .username(user.getUsername())
+                    .roles(user.getRoles())
+                    .build();
+        }
+
         userRepository.save(newUser);
         return new ResponseEntity<String>("User successfully registered", HttpStatus.OK);
     }

@@ -3,10 +3,17 @@ package bnext.backend.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.Ordered;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+import java.util.Collections;
 
 @SpringBootApplication
 // L'annotazione EnableEurekaCliente è deprecata e non serve metterla in questo progetto
@@ -38,6 +45,7 @@ public class GatewayApplication {
 				//ROUTE POSITION
 				//.route("position", r -> r.path("/pos/*").uri("http://localhost:8081/"))
 				.route("tutte-le-altre-api", r -> r.path("/user/*").uri("http://localhost:8080/"))
+				//.route("car", r -> r.path("/car/*").uri("http://localhost:8080/"))
 
 
 				.build();

@@ -31,13 +31,14 @@ public class UserController {
     public @Nullable User getUserById(@PathVariable @NotNull String userId) {
         System.out.println("userID " + userId);
         User response = userService.getUserById(userId);
-        System.out.println("Found User " + response.toString());
+        if(response != null)
+            System.out.println("Found User " + response.toString());
         return response;
     }
 
-    @GetMapping("name={userName}")
-    public @Nullable User getUserByName(@PathVariable String userName) {
-        return userService.getUserByName(userName);
+    @GetMapping("username={userName}")
+    public @Nullable User getUserByUsername(@PathVariable String userName) {
+        return userService.getUserByUsername(userName);
     }
 
     @DeleteMapping(value = "del={userId}")
