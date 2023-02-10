@@ -27,3 +27,10 @@ services:
       - '8081:8081'
     environment:
       SPRING_PROFILES_ACTIVE: docker
+
+  dashboard:
+    container_name: dashboard
+    build: ./dashboard
+    # Port exposed to allow interaction with the Web UI.
+    ports:
+      - '4200:4200'

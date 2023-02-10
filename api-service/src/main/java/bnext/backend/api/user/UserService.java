@@ -112,12 +112,7 @@ public class UserService {
         if (!userRepository.findByUsername(user.getUsername()).isEmpty()) {
             throw new RuntimeException("User already exists");
         }
-        User newUser;
-        //System.out.println("Ecco l'utente che arriva a signup "+user);
-        // se viene specificato l'ID, allora creo l'utente con quello specifico ID, altrimenti ne assegno uno casuale
-        if(user.getUserId() != null) {
-            newUser = User.builder()
-                    .userId(user.getUserId())
+        User newUser = User.builder()
                     .active(1)
                     .birthDate(user.getBirthDate())
                     .name(user.getName())
@@ -127,18 +122,6 @@ public class UserService {
                     .username(user.getUsername())
                     .roles(user.getRoles())
                     .build();
-        } else{
-            newUser = User.builder()
-                    .active(1)
-                    .birthDate(user.getBirthDate())
-                    .name(user.getName())
-                    .password(passwordEncoder.encode(user.getPassword()))
-                    .permissions(user.getPermissions())
-                    .surname(user.getSurname())
-                    .username(user.getUsername())
-                    .roles(user.getRoles())
-                    .build();
-        }
 
         userRepository.save(newUser);
         return new ResponseEntity<String>("User successfully registered", HttpStatus.OK);
