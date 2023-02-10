@@ -44,8 +44,7 @@ public class GatewayApplication {
 
 				//ROUTE POSITION
 				//.route("position", r -> r.path("/pos/*").uri("http://localhost:8081/"))
-				.route("tutte-le-altre-api", r -> r.path("/user/*").uri("http://localhost:8080/"))
-				//.route("car", r -> r.path("/car/*").uri("http://localhost:8080/"))
+				.route("tutte-le-altre-api", r -> r.path("/user/*","/car/*").uri("http://localhost:8080/"))
 
 
 				.build();
