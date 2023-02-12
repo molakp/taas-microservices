@@ -56,9 +56,12 @@ public class UserService {
 
     }
 
-    public @Nullable User getUserByName(String username) {
-        if (userRepository.findByUsername(username) != null) {
-            return userRepository.findByUsername(username).get();
+    public @Nullable User getUserByUsername(String username) {
+        //System.out.println("Ecco l'username in input "+username);
+        if (userRepository.findByUsername(username).isPresent()) {
+            Optional<User> userRepo = userRepository.findByUsername(username);
+            return userRepo.get();
+            //return userRepository.findByUsername(username).get();
         } else {
             System.out.println("Users does not exist");
             return null;
@@ -110,15 +113,16 @@ public class UserService {
             throw new RuntimeException("User already exists");
         }
         User newUser = User.builder()
-                .active(1)
-                .birthDate(user.getBirthDate())
-                .name(user.getName())
-                .password(passwordEncoder.encode(user.getPassword()))
-                .permissions(user.getPermissions())
-                .surname(user.getSurname())
-                .username(user.getUsername())
-                .roles(user.getRoles())
-                .build();
+                    .active(1)
+                    .birthDate(user.getBirthDate())
+                    .name(user.getName())
+                    .password(passwordEncoder.encode(user.getPassword()))
+                    .permissions(user.getPermissions())
+                    .surname(user.getSurname())
+                    .username(user.getUsername())
+                    .roles(user.getRoles())
+                    .build();
+
         userRepository.save(newUser);
         return new ResponseEntity<String>("User successfully registered", HttpStatus.OK);
     }

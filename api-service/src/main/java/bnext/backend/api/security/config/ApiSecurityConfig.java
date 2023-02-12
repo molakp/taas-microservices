@@ -37,7 +37,7 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         // Dobbiamo far entrare chiunque in questi due URL
-        web.ignoring().antMatchers("/user/signin", "/user/signup", "/h2-console/**");
+        web.ignoring().antMatchers("/user/signin", "/user/signup", "/user/id=*", "/user/username=*", "/h2-console/**" );
     }
 
     @Autowired

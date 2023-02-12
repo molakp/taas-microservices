@@ -30,3 +30,5 @@ Installare Minikube https://minikube.sigs.k8s.io/docs/start/
 Dopo aprire il terminale:
 - minikube start (ci mette un po' perchè scarica tutto kubernetes)
 
+Se le immagini docker sono già state create andare nella cartella kubernetes e fare da Linux:
+ kubectl apply -f nome-file-deployment.yaml
