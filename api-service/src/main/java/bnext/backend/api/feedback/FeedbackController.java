@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("feedbacks")
 public class FeedbackController {
 
     //grazie a Spring creiamo un'istanza dell'oggetto da cui poi richiamiamo i metodi predefiniti
@@ -24,34 +25,34 @@ public class FeedbackController {
     }
 
     //mi restituisce tutti i position dati ad una determinata macchina
-    @RequestMapping("/feedbacks/{carId}")
+    @GetMapping("/{carId}")
     public @NotNull List<Feedback> getAllFeedbacksOfCar(@PathVariable @NotNull UUID carId) {
 
         return feedbackService.getAllFeedbacksOfCar(carId);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/feedbacks/addFeed")
+    @PostMapping( "/addFeed")
     public String addFeedback(@RequestBody Feedback feedback) {
         return feedbackService.addFeedback(feedback);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/feedbacks/update")
+    @PutMapping( "/update")
     public @NotNull String updateFeedback(@RequestBody Feedback feedback) {
         return feedbackService.updateFeedback(feedback);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/feedbacks/{feedbackId}")
+    @DeleteMapping( "/{feedbackId}")
     public @NotNull String deleteFeedback(@PathVariable @NotNull UUID feedbackId) {
         return feedbackService.deleteFeedback(feedbackId);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/feedbacks")
+    @DeleteMapping( "/deleteAllFeedbacks")
     public @NotNull String deleteAllFeedbacks() {
         return feedbackService.deleteAllFeedbacks();
     }
 
 
-    @RequestMapping("/feedbacks/userId={userId}")
+    @GetMapping("/userId={userId}")
     public @NotNull List<Feedback> getAllUserFeedbacks(@PathVariable @NotNull UUID userId) {
 
         return feedbackService.getAllUserFeedbacks(userId);

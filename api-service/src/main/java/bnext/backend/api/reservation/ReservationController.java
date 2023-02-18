@@ -16,6 +16,7 @@ import java.util.UUID;
 
 
 @RestController
+@RequestMapping("reservations")
 public class ReservationController {
 
     // Recupero la/le variabile/i d'istanza, in modo da essere subito accessibili
@@ -27,7 +28,7 @@ public class ReservationController {
 
     // Reqest mapping ha come default una richiesta di get, quindi dico cosa fare in caso di richiesta GET
     // all'endpoint indicato, in questo caso (/reservations)
-    @RequestMapping("/reservations")
+    @GetMapping("/getAllReservations")
     public @NotNull List<Reservation> getAllReservation() {
         return reservationService.getAllReservation();
     }
@@ -35,7 +36,7 @@ public class ReservationController {
     // Uguale a quella sopra, l'unica differenza è che introduciamo la possibilità di inserire più alternative al posto di "id",
     // quindi passiamo la parola appena scritta dall'utente come variabile di input al metodo "getReservation" tramite il comando @PathVariable
     // ================ "id" è una variabile, utile a mostrare solo una specifica prenotazione =====================
-    @RequestMapping("/reservations/user={id}")
+    @GetMapping("/user={id}")
     // @PathVariable{foo}, è possibile ad esempio inserire due parole ma passare come parametro solo "foo" ad esempio,
     // in questo caso "/reservations/{id}" diventerà "/reservations/{foo}"
     public Optional<Reservation> getReservationById(@PathVariable @NotNull UUID id) {
@@ -44,7 +45,7 @@ public class ReservationController {
         return reservationService.getReservation(id);
     }
 
-    @RequestMapping("/reservations/car-owner-id={userID}")
+    @GetMapping("/car-owner-id={userID}")
     // @PathVariable{foo}, è possibile ad esempio inserire due parole ma passare come parametro solo "foo" ad esempio,
     // in questo caso "/reservations/{id}" diventerà "/reservations/{foo}"
     public List<Reservation> getReservationForCarsOwnedByUser(@PathVariable @NotNull UUID userID) {
@@ -60,26 +61,26 @@ public class ReservationController {
     //     ecc...
     //}
     // quindi vado in headers e metto come key "Content-Type" e come value "application/json", quindi posso mandare la richiesta( pulsante SEND)
-    @RequestMapping(method = RequestMethod.POST, value = "/reservations/add")
+    @PostMapping( "/add")
     public @NotNull String addReservation(@RequestBody Reservation reservation) {
         return reservationService.addReservation(reservation);
     }
 
 
     // aggiorno una determinata prenotazione, identificato dall'id passato dall'utente
-    @RequestMapping(method = RequestMethod.PUT, value = "/reservations/update")
+    @PutMapping( "/update")
     public @NotNull String updateReservation(@RequestBody @NotNull Reservation reservation) {
         return reservationService.updateReservation(reservation);
     }
 
     //elimino una determinata prenotazione, identificata dall'Id
-    @RequestMapping(method = RequestMethod.DELETE, value = "/reservations/delete={id}")
+    @DeleteMapping( "/delete={id}")
     public @NotNull String deleteReservation(@PathVariable @NotNull UUID id) {
         return reservationService.deleteReservation(id);
     }
 
     // Metodo che cerca tutte le macchine disponibili in una determinata data
-    @PostMapping("/reservations/availableCars")
+    @PostMapping("/availableCars")
     public @NotNull List<Car> searchAvailableCars(@RequestBody @NotNull String payload) throws JSONException {
         Date startOfBookParsed, endOfBookParsed;
         JSONObject obj = new JSONObject(payload);
