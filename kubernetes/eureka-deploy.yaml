@@ -29,12 +29,35 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    io.kompose.service: discovery-server
-  name: discovery-server
+    io.kompose.service: discovery-server-external
+  name: discovery-server-external
 spec:
   ports:
-    - name: "8761"
+    - name: external-port
+      protocol: TCP
       port: 8761
       targetPort: 8761
+      nodePort: 30044
+  type: NodePort
+
   selector:
     io.kompose.service: discovery-server
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: discovery-server-internal
+  name: discovery-server-internal
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8761
+      targetPort: 8761
+
+  selector:
+    io.kompose.service: discovery-server
+
+

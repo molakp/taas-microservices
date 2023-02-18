@@ -11,8 +11,18 @@ Per avviarli da IntelliJ occhio alle rispettive versioni, JAVA 11 per i primi 3 
 
 AVVIO DEL PROGETTO
 
-*Con Docker*
+# *Docker*
 
+### Creare un'immagine docker
+
+- Andare nella cartella del servizio
+- Fare la build Maven per aggiorare il file jar
+- Fare il build della immagine docker con il comando: docker build -t nome-immagine:tag .
+- docker tag my-image-name myusername/myrepository:tagname (es docker tag api-service ssilvestro/api-service:latest  )
+- docker push myusername/myrepository:tagname
+
+
+### Avviare i servizi
 Per avviare tutto insieme è meglio usare Docker
 Andare su docker-compose.yaml e dovrebbe uscire il pulsante per avviare tutto. Docker compose va a prendersi i docker file dei singoli servizi e li esegue  con le specifiche che gli sono date
  
@@ -22,16 +32,30 @@ Andare su docker-compose.yaml e dovrebbe uscire il pulsante per avviare tutto. D
 
 
 
-KUBERNETES
-Installazione:
+# KUBERNETES
+### Installazione:
 Installare Minikube https://minikube.sigs.k8s.io/docs/start/
 
-Dopo aprire il terminale:
-- minikube start (ci mette un po' perchè scarica tutto kubernetes)
+Cose da sapere:
+- Minikube è un tool che permette di avviare un cluster kubernetes locale.
+- Minikube crea un cluster kubernetes con **un solo nodo** quindi non è adatto per fare test di scalabilità ma è perfetto per fare test di funzionamento e sviluppo.
+- Il nome del cluster è **minikube** e il nome del nodo è **minikube**.
+- Per sapere l'indirizzo ip del cluster usare il comando: **minikube ip**
 
-kubectl apply -f api-service-deployment.yaml
-minikube service gateway
-kubectl get svc
+
+
+#### Dopo aprire il terminale (su Windows usare WSL):
+- minikube start (ci mette un po' la prima volta perchè scarica tutto kubernetes)
+-  minikube addons enable metrics-server ( se non già abilitato)
+- minikube dashboard (per vedere la dashboard in chrome all'url che dice)
+- Andare sulla dashboard per controllare che il cluster sia avviato
+
+### Per avviare i servizi:
+- Andare nella cartella kubernetes
+- kubectl apply -f servizio-da-avviare.yaml (es. kubectl apply -f eureka-deploy.yaml)
+- Verificare sulla dahboard che i servizi siano avviati andando in Service-> Services
+- minikube service gateway
+
 kubectl get pods
 minikube gateway
 

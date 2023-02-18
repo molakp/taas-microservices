@@ -30,11 +30,28 @@ kind: Service
 metadata:
   labels:
     io.kompose.service: gateway
-  name: gateway
+  name: gateway-internal
 spec:
   ports:
-    - name: "9191"
+    - protocol: TCP
       port: 9191
       targetPort: 9191
   selector:
     io.kompose.service: gateway
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: gateway
+  name: gateway-external
+spec:
+  ports:
+    - protocol: TCP
+      port: 9191
+      targetPort: 9191
+      nodePort: 30046
+  type: NodePort
+  selector:
+    io.kompose.service: gateway
+
