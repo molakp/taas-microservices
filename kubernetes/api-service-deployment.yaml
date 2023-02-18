@@ -16,7 +16,7 @@ spec:
         io.kompose.service: api-service
     spec:
       containers:
-        - image: ssilvestro/api-service
+        - image: ssilvestro/api-service:1.0.1
           name: api-service
           ports:
             - containerPort: 8080
