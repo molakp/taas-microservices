@@ -19,6 +19,16 @@ kubectl delete -n default service api-service
 kubectl apply -f ./kubernetes/api-service-deployment.yaml
 kubectl rollout restart deployment api-service
 
+# ------------------  DASHBOARD ------------------
+#Cancello risorse esistenti dal cluster kubernetes
+kubectl delete -n default deployment dashboard
+kubectl delete -n default service dashboard
+kubectl delete -n default service dashboard-external
+kubectl delete -n default service dashboard-internal
+kubectl apply -f ./kubernetes/dashboard-deployment.yaml
+kubectl rollout restart deployment dashboard
+kubectl expose deployment/dashboard --type=LoadBalancer --port 4200 --target-port 4200
+
 
 
 

@@ -17,6 +17,7 @@ export class AuthService {
 	constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) { }
 
 	signin(request: Request): Observable<any> {
+    console.log("URL "+environment.apiBaseUrl  + '/user/signin');
 		return this.http.post<any>(environment.apiBaseUrl  + '/user/signin', request, {headers: new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(map((resp) => {
 			//localStorage.setItem('user', resp.user.username);
 			return resp;
@@ -24,7 +25,8 @@ export class AuthService {
 	}
 
 	signup(request: Request): Observable<any> {
-		return this.http.post<any>(environment.apiBaseUrl  + '/user/signup', request, {headers: new HttpHeaders({ 'Content-Type': 'application/json' }), responseType: 'text' as 'json'}).pipe(map((resp) => {     
+		console.log("URL "+environment.apiBaseUrl  + '/user/signup');
+    return this.http.post<any>(environment.apiBaseUrl  + '/user/signup', request, {headers: new HttpHeaders({ 'Content-Type': 'application/json' }), responseType: 'text' as 'json'}).pipe(map((resp) => {
 			return resp;
 		}));
 	}
@@ -55,7 +57,7 @@ export class AuthService {
 		this.router.navigate(['signin']);
 	}
 
-	
+
 	updateUser(user:modifiedUser) {
 		return this.http.put<any>(environment.apiBaseUrl  + '/user/update', user, {headers: new HttpHeaders({ 'Content-Type': 'application/json' })}).pipe(map((resp) => {
 			//localStorage.setItem('user', resp.user.username);
@@ -63,15 +65,15 @@ export class AuthService {
 		}));
 
 		//localStorage.clear();
-		
+
 
 		//this.router.navigateByUrl('signin');
 	}
 
 	delteUser(userId:string) {
 		//console.log("provaaaa " +this.baseUrl + '/user/del='+userId)
-		return this.http.delete<any>(environment.apiBaseUrl  + '/user/del='+userId).pipe(map((resp) => {     
-			console.log("Ecco la risposta della delete "+resp)                                                    
+		return this.http.delete<any>(environment.apiBaseUrl  + '/user/del='+userId).pipe(map((resp) => {
+			console.log("Ecco la risposta della delete "+resp)
 			return resp;
 		}));
 		/*return this.http.delete<any>(this.baseUrl + '/user/del='+userId).pipe(map((resp) => {
@@ -80,7 +82,7 @@ export class AuthService {
 			this.router.navigateByUrl('signin');
 			return resp;
 		}));*/
-		
+
 	}
 
 	isUserSignedin() {
